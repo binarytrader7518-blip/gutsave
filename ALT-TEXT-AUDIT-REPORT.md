@@ -1,24 +1,23 @@
 # ALT-TEXT-AUDIT-REPORT — Gut Save
 
-Site: https://en-gutsave.vercel.app/  ·  Audit date: 2026-11-25
+Site: https://en-gutsave.vercel.app/  ·  Audit date: 2026-11-25 (revision 2)
 
 ## Summary
 
 - HTML pages audited: 29
 - Total `<img>` elements checked: 164
-- Informative images with descriptive alt text: 158
-- Decorative images correctly using `alt=""`: 6 (the floating ingredient illustrations behind the hero bottle, marked `aria-hidden`)
-- Images missing alt / generic alt after fixes: 0
-- Images corrected during audit: 0 — alt text was written into the page templates during the build, and the first scan found no missing, generic or empty-but-informative alt attributes. (No count is claimed beyond what the scan found.)
-- Images added by JavaScript: none (the modal, sticky bar and toast images are in the HTML and were included in the scan).
-- CSS background images: none carry meaning (decorative gradients only).
-- Raster format: every file in `/img/` was opened with Pillow and confirmed to be genuine WebP (26 files). Ingredient illustrations are SVG vectors.
+- Images with descriptive alt text: 164
+- Images with missing or empty alt: 0
+- Images corrected in this revision: 6. The six floating ingredient images behind the hero bottle on the homepage had `alt=""` (decorative). They now have descriptive alt text, for example "Halved papaya with black seeds, a Gut Save ingredient, behind the Gut Save bottle".
+- Also fixed: the inline SVG logo, which appears in the header and footer of every page and as the favicon, now has `role="img"`, `aria-label` and `<title>` ("Gut Save logo"). Decorative UI icons stay `aria-hidden`.
+- Decorative images with `alt=""`: 0
+- Raster format: all 26 files in `/img/` were verified as genuine WebP. Ingredient illustrations are SVG.
 
 ## Verification
 
-1. Scan 1 — every `<img>` in every built HTML file was parsed and its `alt` checked (missing / empty / generic / too short).
-2. Scan 2 — re-run on the final build after the last edit, with the same result, plus a headless-Chrome pass on desktop (1366px) and mobile (390px) across all pages confirming no broken images (`naturalWidth === 0`).
-3. Limitation: the files were checked locally on an emulation of the Vercel routing. Re-check on the live domain after deploy (the HTML is identical, so the results should be too).
+1. Scan 1: the source HTML was parsed and every `<img>` checked for a missing, empty or generic `alt` attribute. 0 issues.
+2. Scan 2: all 29 pages were rendered in headless Chrome and each `img.getAttribute("alt")` was checked. 164 of 164 have non-empty alt text.
+3. Re-check on the live domain after deploy. The HTML is identical, so the results should match.
 
 **Final status: PASSED**
 
@@ -205,12 +204,12 @@ Site: https://en-gutsave.vercel.app/  ·  Audit date: 2026-11-25
 
 | Image | Alt text |
 |---|---|
-| `/img/ingredients/papaya-seed.svg` | `""` (decorative) |
-| `/img/ingredients/lions-mane.svg` | `""` (decorative) |
-| `/img/ingredients/probiotics.svg` | `""` (decorative) |
-| `/img/ingredients/colostrum.svg` | `""` (decorative) |
-| `/img/ingredients/black-cumin.svg` | `""` (decorative) |
-| `/img/ingredients/fish-collagen.svg` | `""` (decorative) |
+| `/img/ingredients/papaya-seed.svg` | Halved papaya with black seeds, a Gut Save ingredient behind the Gut Save bottle |
+| `/img/ingredients/lions-mane.svg` | White lion's mane mushroom, a Gut Save ingredient behind the Gut Save bottle |
+| `/img/ingredients/probiotics.svg` | Rod-shaped probiotic bacteria in a petri dish behind the Gut Save bottle |
+| `/img/ingredients/colostrum.svg` | Glass of creamy colostrum, a Gut Save ingredient behind the Gut Save bottle |
+| `/img/ingredients/black-cumin.svg` | Black cumin seeds with a pale blue nigella flower behind the Gut Save bottle |
+| `/img/ingredients/fish-collagen.svg` | Collagen peptide strands beside a scoop of collagen powder behind the Gut Save bottle |
 | `/img/gut-save-bottle.webp` | Gut Save dietary supplement bottle, 30 capsules, with navy and red label |
 | `/img/gut-save-bottle-studio.webp` | Gut Save bottle on a marble stand beside a glass of water, a plant and two capsules |
 | `/img/focus-gut-lining-support.webp` | Collagen strands and a glass of colostrum illustrating gut lining support |
